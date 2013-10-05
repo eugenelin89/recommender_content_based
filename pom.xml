@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.grouplens.mooc</groupId>
+  <artifactId>cbf-filter</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>MOOC CBF assignment</name>
+
+  <properties>
+    <lenskit.version>2.0</lenskit.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>GroupLens</id>
+      <url>http://dev.grouplens.org/maven/</url>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.grouplens.lenskit</groupId>
+      <artifactId>lenskit-core</artifactId>
+      <version>${lenskit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.0.9</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <id>make-scripts</id>
+            <goals><goal>assemble</goal></goals>
+            <phase>package</phase>
+            <configuration>
+              <repositoryLayout>flat</repositoryLayout>
+              <programs>
+                <program>
+                  <name>run-cbf</name>
+                  <mainClass>org.grouplens.mooc.cbf.CBFMain</mainClass>
+                </program>
+              </programs>
+              <assembleDirectory>${project.build.directory}</assembleDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>source-package</id>
+            <goals><goal>run</goal></goals>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <zip destfile="${project.build.directory}/cbf-assignment.zip">
+                  <mappedresources>
+                    <fileset dir="${basedir}">
+                      <include name="pom.xml"/>
+                      <include name="src/**/*.java"/>
+                      <include name="src/main/resources/*.xml"/>
+                      <include name="data/*.csv"/>
+                    </fileset>
+                    <globmapper from="*" to="cbf-assignment/*"/>
+                  </mappedresources>
+                </zip>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+    
+</project>

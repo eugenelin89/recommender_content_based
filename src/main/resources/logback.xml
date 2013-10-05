@@ -1,0 +1,14 @@
+<configuration>
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%-5level %logger{32}: %msg%n</pattern>
+    </encoder>
+    <target>System.err</target>
+  </appender>
+
+  <logger name="org.grouplens.grapht" level="WARN"/>
+
+  <root level="INFO">
+    <appender-ref ref="console"/>
+  </root>
+</configuration>
