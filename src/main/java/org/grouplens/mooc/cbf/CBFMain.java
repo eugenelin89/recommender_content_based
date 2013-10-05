@@ -84,10 +84,10 @@ public class CBFMain {
               .to(CSVItemTagDAO.class);
         // specify tag file
         config.set(TagFile.class)
-              .to(new File("data/movie-tags.csv"));
+              .to(new File("data/movie-tags-test.csv"));
         // and title file
         config.set(TitleFile.class)
-              .to(new File("data/movie-titles.csv"));
+              .to(new File("data/movie-titles-test.csv"));
 
         // our user DAO can look up by user name
         config.bind(UserDAO.class)

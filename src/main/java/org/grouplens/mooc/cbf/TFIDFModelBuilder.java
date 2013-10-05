@@ -10,6 +10,7 @@ import org.grouplens.mooc.cbf.dao.ItemTagDAO;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -71,7 +72,23 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
             // Now the vector is empty (all keys are 'unset').
 
             // TODO Populate the work vector with the number of times each tag is applied to this item.
+            List<String> tags =  dao.getItemTags(item);
+            for(String tag: tags){
+                // from tagIds we find out what is the long value for this tag
+                long tagId = tagIds.get(tag);
 
+                // check work to see if this tagId already exist.  If so, increment by 1.  Else init to 1.
+                try{
+                    double newValue = work.get(tagId)+1;
+                    work.set(tagId, newValue);
+
+                }catch(IllegalArgumentException e){
+                    // init value to 1
+                    work.set(tagId, 1);
+                }
+
+
+            }
 
             // TODO Increment the document frequency vector once for each unique tag on the item.
 
