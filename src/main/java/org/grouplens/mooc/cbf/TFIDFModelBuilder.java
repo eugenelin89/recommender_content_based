@@ -79,8 +79,8 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
 
                 // check work to see if this tagId already exist.  If so, increment by 1.  Else init to 1.
                 try{
-                    double newValue = work.get(tagId)+1;
-                    work.set(tagId, newValue);
+                    //double newValue = work.get(tagId)+1;
+                    work.set(tagId, work.get(tagId)+1);
 
                 }catch(IllegalArgumentException e){
                     // init value to 1
