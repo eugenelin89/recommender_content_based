@@ -66,7 +66,9 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
 
         // Iterate over the items to compute each item's vector.
         LongSet items = dao.getItemIds();
+        long counter = 0;
         for (long item: items) {
+            counter++;
             // Reset the work vector for this item's tags.
             work.clear();
             // Now the vector is empty (all keys are 'unset').
@@ -121,7 +123,14 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
             //System.out.print(e.getKey());
             //System.out.print(": ");
             //System.out.print(docFreq.get(e.getKey()));
-            docFreq.set(e.getKey(), Math.log10(e.getValue()));
+
+            long tagId = e.getKey();
+            if(tagId ==1){
+                System.out.println("");
+            }
+            double idf = e.getValue();
+            double log_idf = Math.log10(counter/idf);
+            docFreq.set(tagId, log_idf);
             //System.out.print("   After...");
             //System.out.print(e.getKey());
             //System.out.print(": ");
@@ -159,8 +168,8 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
             // TODO Normalize the TF-IDF vector to be a unit vector
             // HINT The method tv.norm() will give you the Euclidian length of the vector
             double len = tv.norm();
-            System.out.print("Length: ");
-            System.out.println(len);
+            //System.out.print("Length: ");
+            //System.out.println(len);
             for(VectorEntry v: tv.fast()){
                 tv.set(v.getKey(), v.getValue()/len);
             }
