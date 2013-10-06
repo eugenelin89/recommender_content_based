@@ -80,8 +80,25 @@ public class TFIDFItemScorer extends AbstractItemScorer {
             if (p != null && p.getValue() >= 3.5) {
                 // The user likes this item!
                 // TODO Get the item's vector and add it to the user's profile
+                // 1. Get the itemVectors for this item
+                long itemId = r.getItemId();
+                SparseVector itemVector = this.model.getItemVector(itemId);
+
+                for(VectorEntry v: itemVector.fast()){
+                    // get the vector's key
+                    long vKey = v.getKey();
+
+                    // get the vector's value
+                    double vValue = v.getValue();
+
+                    // add the value to Profile
+                    double sum = vValue + profile.get(vKey);
+                    profile.set(vKey, sum);
+                }
             }
         }
+        System.out.println("");
+
 
         // The profile is accumulated, return it.
         // It is good practice to return a frozen vector.
