@@ -116,6 +116,16 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
         // Invert and log the document frequency.  We can do this in-place.
         for (VectorEntry e: docFreq.fast()) {
             // TODO Update this document frequency entry to be a log-IDF value
+            // debug before
+            //System.out.print("Before...");
+            //System.out.print(e.getKey());
+            //System.out.print(": ");
+            //System.out.print(docFreq.get(e.getKey()));
+            docFreq.set(e.getKey(), Math.log10(e.getValue()));
+            //System.out.print("   After...");
+            //System.out.print(e.getKey());
+            //System.out.print(": ");
+            //System.out.println(docFreq.get(e.getKey()));
         }
 
         // Now docFreq is a log-IDF vector.
