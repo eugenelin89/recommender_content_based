@@ -133,11 +133,37 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
         // Create a map to store the final model data.
         Map<Long,SparseVector> modelData = Maps.newHashMap();
         for (Map.Entry<Long,MutableSparseVector> entry: itemVectors.entrySet()) {
-            MutableSparseVector tv = entry.getValue();
+            MutableSparseVector tv = entry.getValue(); // tv is the TF of each tag for this item
             // TODO Convert this vector to a TF-IDF vector
+            for(VectorEntry v: tv.fast()){
+                //System.out.print("Movie: ");
+                //System.out.print(entry.getKey());
+                //System.out.print(" Tag: ");
+                //System.out.print(v.getKey());
+
+                double tf = v.getValue();
+                //System.out.print(" tf: ");
+                //System.out.print(tf);
+
+
+                double idf = docFreq.get(v.getKey());
+                //System.out.print(" idf: ");
+                //System.out.print(idf);
+
+                tv.set(v.getKey(), tf*idf);
+                //System.out.print(" tf*idf ");
+                //System.out.println(tv.get(v.getKey()));
+            }
+            // tv is now the tf*idf vector
 
             // TODO Normalize the TF-IDF vector to be a unit vector
             // HINT The method tv.norm() will give you the Euclidian length of the vector
+            double len = tv.norm();
+            System.out.print("Length: ");
+            System.out.println(len);
+            for(VectorEntry v: tv.fast()){
+                tv.set(v.getKey(), v.getValue()/len);
+            }
             
             // Store a frozen (immutable) version of the vector in the model data.
             modelData.put(entry.getKey(), tv.freeze());
