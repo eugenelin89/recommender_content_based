@@ -87,6 +87,23 @@ public class TFIDFModelBuilder implements Provider<TFIDFModel> {
             }
 
             // TODO Increment the document frequency vector once for each unique tag on the item.
+            // create another sparse vector to see if a tag already been applied to this item
+            MutableSparseVector temp = MutableSparseVector.create(tagIds.values());
+
+            for(String tag: tags){
+                long tagId = tagIds.get(tag);
+                try{
+                    // we already saw this tag in this item.
+                    temp.get(tagId);
+                    continue;
+                }catch(IllegalArgumentException e){
+                    // first time we see this tag in this item.
+                    temp.set(tagId, 1);
+                    docFreq.set(tagId, docFreq.get(tagId)+1);
+                }
+
+            }
+
 
             // Save a shrunk copy of the vector (only storing tags that apply to this item) in
             // our map, we'll add IDF and normalize later.
