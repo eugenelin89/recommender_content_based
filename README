@@ -1,0 +1,9 @@
+A Recommender System Prototype, using Content Based Filtering.
+
+The system is built with LensKit, an open-source took kit for building recommenders.
+
+Requires the following:
+- LensKit
+- Apache Maven
+- Java IDE such as Eclipse or IntelliJ IDEA.
+
