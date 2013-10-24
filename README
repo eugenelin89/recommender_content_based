@@ -47,7 +47,6 @@ Maps User ID to User Name.
 The test data is injected into the system in CBFMain.java in the method configureRecommender().
 
 Run the recommender with command similar to the following, where the arguments are the user IDs:
-:
 runecbf 4045 144 3855 1637 2919
 
 With the above command, the following output is produced.
