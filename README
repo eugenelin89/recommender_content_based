@@ -1,15 +1,45 @@
-A Recommender System Prototype, using Content Based Filtering.
+Please see project page at:
+http://eugenelin89.github.io/recommender_content_based/
+
+SETUP
 
 The system is built with LensKit, an open-source took kit for building recommenders.
 
 Requires the following:
-- LensKit (http://lenskit.grouplens.org)
-- Apache Maven (https://maven.apache.org)
-- Java IDE such as Eclipse (http://www.eclipse.org/) or IntelliJ IDEA (http://www.jetbrains.com/idea/).
 
-<center>
-$$\begin{align*} \mathrm{cos}(u,i) &amp; = \frac{\vec{u} \cdot \vec{i}}{\|\vec{u}\|_2 \|\vec{i}\|_2} \\
-&amp; = \frac{\sum_t u_t i_t}{\sqrt{\sum_t u_t^2} \sqrt{\sum_t i_t^2}} \end{align*}$$
-</center>
+Java SE Development Kit 7 (http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+LensKit  (http://lenskit.grouplens.org)
+Apache Maven (https://maven.apache.org)
+Java IDE such as Eclipse (http://www.eclipse.org/) or IntelliJ IDEA (http://www.jetbrains.com/idea/).
 
+BACKGROUND
 
+1. Compute item-tag vectors (the model)
+
+Implemented in the model builder (TFIDFModelBuilder, in the get() method), compute the unit-normalized TF-IDF vector for each movie in the data set. The model contains a mapping of item IDs to TF-IDF vectors, normalized to unit vectors, for each item.
+
+2. Build user profile for each query user
+
+The makeUserVector(long) method of TFIDFItemScorer takes a user ID and produces a vector representing that user's profile. In the original implementation, the profile was the sum of the item-tag vectors of all items the user has rated positively (>= 3.5 stars). This approach was later improved with weighted user profile (with the older implementation commented out for reference). Weighted profile is computed with weighted sum of the item vectors for all items, with weights being based on the user's rating.
+
+3. Generate item scores for each user
+
+The heart of the recommendation process in many LensKit recommenders is the score method of the item scorer, in this case TFIDFItemScorer. This method scores each item by using cosine similarity: the score for an item is the cosine between that item's tag vector and the user's profile vector.
+
+TEST DRIVE
+
+A set of test data is provided for movie ratings, but can be easily adopted for other domains.
+
+data/movie-tags.csv
+Attributes associated with each movie. This is the basis of the model generated in step 1.
+
+data/movie-titles.csv
+Maps Movie IDs to Movie Titles.
+
+data/ratings.csv
+Users and their movie ratings. Each line of the CSV file is ordered as: User ID, Movie ID, Rating
+
+data/users.csv
+Maps User ID to User Name.
+
+The test data is injected into the system in CBFMain.java in the method configureRecommender().
