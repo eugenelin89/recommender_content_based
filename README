@@ -45,3 +45,43 @@ data/users.csv
 Maps User ID to User Name.
 
 The test data is injected into the system in CBFMain.java in the method configureRecommender().
+
+Run the recommender with command similar to the following, where the arguments are the user IDs:
+:
+runecbf 4045 144 3855 1637 2919
+
+With the above command, the following output is produced.
+
+recommendations for user 4045:
+  807: 0.1932
+  63: 0.1438
+  187: 0.0947
+  11: 0.0900
+  641: 0.0471
+recommendations for user 144:
+  11: 0.1394
+  585: 0.1229
+  671: 0.1130
+  672: 0.0878
+  141: 0.0436
+recommendations for user 3855:
+  1892: 0.2243
+  1894: 0.1465
+  604: 0.1258
+  462: 0.1050
+  10020: 0.0898
+recommendations for user 1637:
+  393: 0.1976
+  24: 0.1900
+  2164: 0.1522
+  601: 0.1334
+  5503: 0.0992
+recommendations for user 2919:
+  180: 0.1454
+  11: 0.1238
+  1891: 0.1172
+  424: 0.1074
+  2501: 0.0973
+
+
+
