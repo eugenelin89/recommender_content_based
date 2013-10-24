@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Content Based Recommendation System by eugenelin89</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Content Based Recommendation System</h1>
+        <h2>Recommender Prototype using Content Based Filtering</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/eugenelin89/recommender_content_based/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/eugenelin89/recommender_content_based/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/eugenelin89/recommender_content_based" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>The system is built with LensKit, an open-source took kit for building recommenders.</p>
+
+<p>Requires the following:</p>
+
+<ul>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Java SE Development Kit 7</a></li>
+<li><a href="http://lenskit.grouplens.org/download.html">LensKit</a></li>
+<li><a href="https://maven.apache.org/download.cgi">Apache Maven</a></li>
+<li>Java IDE such as <a href="http://www.eclipse.org/">Eclipse</a> or <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a>
+</li>
+</ul><h2>
+<a name="background" class="anchor" href="#background"><span class="octicon octicon-link"></span></a>Background</h2>
+
+<h3>
+<a name="1-compute-item-tag-vectors-the-model" class="anchor" href="#1-compute-item-tag-vectors-the-model"><span class="octicon octicon-link"></span></a>1. Compute item-tag vectors (the model)</h3>
+
+<p>Implemented in the model builder (TFIDFModelBuilder, in the get() method), compute the unit-normalized TF-IDF vector for each movie in the data set. The model contains a mapping of item IDs to TF-IDF vectors, normalized to unit vectors, for each item.</p>
+
+<h3>
+<a name="2-build-user-profile-for-each-query-user" class="anchor" href="#2-build-user-profile-for-each-query-user"><span class="octicon octicon-link"></span></a>2. Build user profile for each query user</h3>
+
+<p>The makeUserVector(long) method of TFIDFItemScorer takes a user ID and produces a vector representing that user's profile. In the original implementation, the profile was the sum of the item-tag vectors of all items the user has rated positively (&gt;= 3.5 stars). This approach was later improved with weighted user profile (with the older implementation commented out for reference).  Weighted profile is computed with weighted sum of the item vectors for all items, with weights being based on the user's rating.</p>
+
+<h3>
+<a name="3-generate-item-scores-for-each-user" class="anchor" href="#3-generate-item-scores-for-each-user"><span class="octicon octicon-link"></span></a>3. Generate item scores for each user</h3>
+
+<p>The heart of the recommendation process in many LensKit recommenders is the score method of the item scorer, in this case TFIDFItemScorer. This method scores each item by using cosine similarity: the score for an item is the cosine between that item's tag vector and the user's profile vector. </p>
+
+<h2>
+<a name="test-drive-the-recommender" class="anchor" href="#test-drive-the-recommender"><span class="octicon octicon-link"></span></a>Test drive the recommender</h2>
+
+<p>A set of test data is provided for movie ratings, but can be easily adopted for other domains.</p>
+
+<h3>
+<a name="datamovie-tagscsv" class="anchor" href="#datamovie-tagscsv"><span class="octicon octicon-link"></span></a>data/movie-tags.csv</h3>
+
+<p>Attributes associated with each movie.  This is the basis of the model generated in step 1.</p>
+
+<h3>
+<a name="datamovie-titlescsv" class="anchor" href="#datamovie-titlescsv"><span class="octicon octicon-link"></span></a>data/movie-titles.csv</h3>
+
+<p>Maps Movie IDs to Movie Titles.</p>
+
+<h3>
+<a name="dataratingscsv" class="anchor" href="#dataratingscsv"><span class="octicon octicon-link"></span></a>data/ratings.csv</h3>
+
+<p>Users and their movie ratings.  Each line of the CSV file is ordered as: User ID, Movie ID, Rating</p>
+
+<h3>
+<a name="datauserscsv" class="anchor" href="#datauserscsv"><span class="octicon octicon-link"></span></a>data/users.csv</h3>
+
+<p>Maps User ID to User Name.</p>
+
+<p>The test data is injected into the system in CBFMain.java in the method configureRecommender().</p>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40958814-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
