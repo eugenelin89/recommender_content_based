@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Content Based Recommendation System : Recommender Prototype using Content Based Filtering" />
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Content Based Recommendation System by eugenelin89</title>
+    <title>Content Based Recommendation System</title>
   </head>
 
   <body>
 
-    <header>
-      <div class="container">
-        <h1>Content Based Recommendation System</h1>
-        <h2>Recommender Prototype using Content Based Filtering</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/eugenelin89/recommender_content_based">View on GitHub</a>
 
-        <section id="downloads">
-          <a href="https://github.com/eugenelin89/recommender_content_based/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/eugenelin89/recommender_content_based/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/eugenelin89/recommender_content_based" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+          <h1 id="project_title">Content Based Recommendation System</h1>
+          <h2 id="project_tagline">Recommender Prototype using Content Based Filtering</h2>
 
-    <div class="container">
-      <section id="main_content">
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/eugenelin89/recommender_content_based/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/eugenelin89/recommender_content_based/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h2>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
 
@@ -43,6 +46,11 @@
 </li>
 </ul><h2>
 <a name="background" class="anchor" href="#background"><span class="octicon octicon-link"></span></a>Background</h2>
+
+<p>This recommendation system prototype uses content-based filtering.  For detailed background, please refer to:
+<a href="http://recommender-systems.org/content-based-filtering/">http://recommender-systems.org/content-based-filtering/</a></p>
+
+<p>The algorithm implemented in this prototype is composed of the following steps: </p>
 
 <h3>
 <a name="1-compute-item-tag-vectors-the-model" class="anchor" href="#1-compute-item-tag-vectors-the-model"><span class="octicon octicon-link"></span></a>1. Compute item-tag vectors (the model)</h3>
@@ -60,7 +68,7 @@
 <p>The heart of the recommendation process in many LensKit recommenders is the score method of the item scorer, in this case TFIDFItemScorer. This method scores each item by using cosine similarity: the score for an item is the cosine between that item's tag vector and the user's profile vector. </p>
 
 <h2>
-<a name="test-drive-the-recommender" class="anchor" href="#test-drive-the-recommender"><span class="octicon octicon-link"></span></a>Test drive the recommender</h2>
+<a name="test-drive" class="anchor" href="#test-drive"><span class="octicon octicon-link"></span></a>Test Drive</h2>
 
 <p>A set of test data is provided for movie ratings, but can be easily adopted for other domains.</p>
 
@@ -92,6 +100,14 @@
       </section>
     </div>
 
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Content Based Recommendation System maintained by <a href="https://github.com/eugenelin89">eugenelin89</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -102,6 +118,7 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
