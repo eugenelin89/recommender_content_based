@@ -15,6 +15,10 @@ Apache Maven (https://maven.apache.org)
 Java IDE such as Eclipse (http://www.eclipse.org/) or IntelliJ IDEA (http://www.jetbrains.com/idea/).
 
 BACKGROUND
+This recommendation system prototype uses content-based filtering.  For detailed background, please refer to:
+http://recommender-systems.org/content-based-filtering/
+
+The algorithm implemented in this prototype is composed of the following steps: 
 
 1. Compute item-tag vectors (the model)
 
